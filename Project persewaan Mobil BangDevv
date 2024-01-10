@@ -1,0 +1,249 @@
+.model small            
+.code
+org 100h
+jmp mulai
+    nama    db 0dh, 0ah, 0dh, 0ah,"Nama anda  : ", '$'
+    nik     db 0dh, 0ah,"NIK anda   : ", '$'
+    no      db 0dh, 0ah,"No. HP     : ", '$'
+        tampung_nama db 30,?,30 dup (?)
+        tampung_nik db 30,?,30 dup (?)
+        tampung_no db 30,?,30 dup (?)
+    j1      db 0dh, 0ah,"---- PROGRAM PERSEWAAN MOBIL ----", '$'  
+    j2      db 0dh, 0ah,"         ", '$'
+    j3      db 0dh, 0ah,"Silakan masukkan data diri anda." , '$' 
+    j4      db 0dh, 0dh, 0dh, 0ah, 0dh, 0ah, "Selamat datang di persewaan Mobil BangDevv....", '$' 
+    j5      db 0dh, 0ah," "
+            db 0dh, 0ah, "Berikut sepeda yang tersedia saat ini (max 3 hari): ", 0dh, 0ah      
+
+            db "=======================================================", 0dh, 0ah
+            db "|| 1. Mobil      (1 jam) Rp. 300.000      ||", 0dh, 0ah  
+            db "|| 2. Mobil      (2 jam) Rp. 450.000      ||", 0dh, 0ah
+            db "|| 3. Mobil      (3 jam) Rp. 500.000      ||", 0dh, 0ah
+            db "|| 4. Mobil      (5 jam) Rp. 600.000      ||", 0dh, 0ah 
+            db "|| 5. Mobil      (12 jam) Rp. 750.000      ||", 0dh, 0ah
+            db "|| 6. Mobil      (24 jam) Rp. 850.000      ||", 0dh, 0ah
+            db "|| 7. Mobil      (2 hari) Rp. 1.200.000      ||", 0dh, 0ah
+            db "|| 8. Mobil      (3 hari) Rp. 2.000.000      ||", 0dh, 0ah
+            db "=======================================================", 0dh, 0ah
+            db 0dh, 0ah, "Mobil nomor berapa yang akan anda sewa ? ", '$'
+    j6      db 0dh, 0ah, 0dh, 0ah, "Proses berhasil, berikut rinciannya :", '$'                                          
+    j7      db 0dh, 0ah,0dh, 0ah, "Mobil bisa dipilih dan dibawa setelah pembayaran",0dh, 0ah, "Terima kasih atas kunjungan anda...", '$'
+    j8      db 0dh, 0ah, 0dh, 0ah,"Apakah ada tambahan mobil yang disewa ?(Y, N)", '$'
+    salah   db 0dh, 0ah, "Tidak ada pilihan.", '$'
+    hsl1    db 0dh, 0ah, 0dh, 0ah, "Mobil   (1 jam)",0dh, 0ah, "Harga              Rp.300.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl2    db 0dh, 0ah, 0dh, 0ah, "Mobil   (2 jam)",0dh, 0ah, "Harga              Rp.450.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl3    db 0dh, 0ah, 0dh, 0ah, "Mobil   (3 jam)",0dh, 0ah, "Harga              Rp.500.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl4    db 0dh, 0ah, 0dh, 0ah, "Mobil   (5 jam)",0dh, 0ah, "Harga              Rp.600.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl5    db 0dh, 0ah, 0dh, 0ah, "Mobil   (12 jam)",0dh, 0ah, "Harga              Rp.750.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl6    db 0dh, 0ah, 0dh, 0ah, "Mobil   (24 jam)",0dh, 0ah, "Harga              Rp.850.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl7    db 0dh, 0ah, 0dh, 0ah, "Mobil (1 hari)",0dh, 0ah, "Harga           Rp.1.200.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+    hsl8    db 0dh, 0ah, 0dh, 0ah, "Mobil (2 hari)",0dh, 0ah, "Harga           Rp.2.000.000",0dh, 0ah,0dh, 0ah, "Mobil harap dikembalikan pada waktunya dengan kondisi utuh." , '$'
+
+mulai:
+    mov ah,09h
+    lea dx,j1
+    int 21h
+        
+    mov ah,09h
+    lea dx,j2
+    int 21h        
+        
+    mov ah,09h
+    lea dx,j3
+    int 21h       
+                               
+    mov ah,09h
+    lea dx,nama
+    int 21h        
+
+    MOV ah, 0ah
+    LEA dx, tampung_nama
+    INT 21h
+    PUSH dx 
+    
+    MOV ah, 09
+    LEA dx, nik
+    INT 21h
+    
+    MOV ah, 0ah
+    LEA dx, tampung_nik
+    INT 21h
+    PUSH dx    
+          
+    MOV ah, 09
+    LEA dx, no
+    INT 21h
+              
+    MOV ah, 0ah
+    LEA dx, tampung_no
+    INT 21h
+    PUSH dx
+    
+    MOV ah, 09
+    LEA dx, j4
+    INT 21h
+
+mulai2:        
+    MOV ah, 09
+    LEA dx, j5
+    INT 21h   
+    
+Proses1:
+    MOV ah, 01
+    INT 21h
+    
+    CMP al, '1'
+    JE mobil1_1jam
+    
+    CMP al, '2'
+    JE mobil1_2jam
+    
+    CMP al, '3'
+    JE mobil2_3jam   
+    
+    CMP al, '4'
+    JE mobil2_5jam    
+      
+    CMP al, '5'
+    JE mobil3_12jam
+    
+    CMP al, '6'
+    JE mobil3_24jam
+    
+    CMP al, '7'
+    JE mobil4_2hari
+    
+    CMP al, '8'
+    JE mobil4_3hari
+          
+    JNE input_salah 
+    
+Proses2:
+    MOV ah, 09
+    LEA dx, j8
+    INT 21h
+    MOV ah, 01
+    INT 21h
+    
+    CMP al, 'Y'
+    JE sewa_lagi
+    
+    CMP al, 'y'
+    JE sewa_lagi
+    
+    CMP al, 'N'
+    JE end
+    
+    CMP al, 'n'
+    JE end
+    
+    JNE input_salah
+
+mobil1_1jam:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl1
+     INT 21h   
+     
+     JMP Proses2
+     
+mobil1_2jam:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl2       
+     
+     INT 21h   
+     
+     JMP Proses2
+
+mobil2_3jam:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl3
+     INT 21h
+     
+     JMP Proses2 
+     
+mobil2_5jam:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl4
+     INT 21h
+     
+     JMP Proses2
+     
+mobil3_12jam:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl5
+     INT 21h
+     
+     JMP Proses2 
+     
+mobil3_24jam:
+     MOV ah, 09
+     LEA dx, j6 
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl6
+     INT 21h 
+     
+     JMP Proses2
+     
+mobil4_2hari:
+     MOV ah, 09
+     LEA dx, j6
+     
+     MOV ah, 09
+     LEA dx, hsl7
+     INT 21h 
+     
+     JMP Proses2
+     
+mobil4_3hari:
+     MOV ah, 09
+     LEA dx, j6
+     INT 21h
+     
+     MOV ah, 09
+     LEA dx, hsl8
+     INT 21h
+     
+     JMP Proses2
+
+sewa_lagi:
+    JMP mulai2
+
+end:
+    MOV ah, 09
+    LEA dx, j7
+    INT 21h
+    INT 20h
+    JMP Exit
+
+input_salah:
+    MOV ah, 09
+    LEA dx, salah
+    INT 21h
+    
+    JMP Proses2
+
+JMP Exit
+Exit:
+RET
